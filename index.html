@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alberta EOI Calculator</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const AlbertaEOICalculator = () => {
+            const [education, setEducation] = React.useState('');
+            const [educationLocation, setEducationLocation] = React.useState('');
+            // ... (all other state variables)
+
+            const calculatePoints = () => {
+                // ... (your calculation logic)
+            };
+
+            return (
+                <div>
+                    <h1>Alberta EOI Points Calculator</h1>
+                    {/* Your form elements go here */}
+                    {/* You'll need to replace the UI components with basic HTML elements */}
+                    <div>
+                        <label htmlFor="education">Highest Level of Education</label>
+                        <select id="education" onChange={(e) => setEducation(e.target.value)}>
+                            <option value="">Select education</option>
+                            <option value="doctorate">Doctorate Degree</option>
+                            {/* ... other options */}
+                        </select>
+                    </div>
+                    {/* ... other form elements */}
+                    <div>
+                        <strong>Total Points: {calculatePoints()}</strong>
+                    </div>
+                    {/* Donation information */}
+                    <div>
+                        <h3>Support This Project</h3>
+                        <p>If you find this calculator helpful, consider making a donation:</p>
+                        <ul>
+                            <li>Interac e-Transfer</li>
+                            <li>PayPal</li>
+                        </ul>
+                        <p>Send your donations to: <a href="mailto:imosklv@gmail.com">imosklv@gmail.com</a></p>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<AlbertaEOICalculator />, document.getElementById('root'));
+    </script>
+</body>
+</html>
