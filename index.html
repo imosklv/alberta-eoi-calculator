@@ -19,67 +19,70 @@
     <div id="root"></div>
 
     <script type="text/babel">
-  import React from 'react';
-  const AlbertaEOICalculator = () => {
-  const [education, setEducation] = React.useState('');
-  const [educationLocation, setEducationLocation] = React.useState('');
-  const [languageScore, setLanguageScore] = React.useState('');
-  const [bilingualProficiency, setBilingualProficiency] = React.useState('no');
-  const [workExperience, setWorkExperience] = React.useState('');
-  const [canadianWorkExperience, setCanadianWorkExperience] = React.useState('');
-  const [age, setAge] = React.useState('');
-  const [familyConnection, setFamilyConnection] = React.useState('no');
-  const [jobOffer, setJobOffer] = React.useState('no');
-  const [jobOfferLocation, setJobOfferLocation] = React.useState('');
-  const [regulatedOccupation, setRegulatedOccupation] = React.useState('no');
+        const AlbertaEOICalculator = () => {
+            const [education, setEducation] = React.useState('');
+            const [educationLocation, setEducationLocation] = React.useState('');
+            const [languageScore, setLanguageScore] = React.useState('');
+            const [bilingualProficiency, setBilingualProficiency] = React.useState('no');
+            const [workExperience, setWorkExperience] = React.useState('');
+            const [canadianWorkExperience, setCanadianWorkExperience] = React.useState('');
+            const [age, setAge] = React.useState('');
+            const [familyConnection, setFamilyConnection] = React.useState('no');
+            const [jobOffer, setJobOffer] = React.useState('no');
+            const [jobOfferLocation, setJobOfferLocation] = React.useState('');
+            const [regulatedOccupation, setRegulatedOccupation] = React.useState('no');
 
-  const calculatePoints = () => {
-    let points = 0;
+            const calculatePoints = () => {
+                let points = 0;
+                const criteria = [];
 
-    // Education
-    if (education === 'doctorate') points += 12;
-    else if (education === 'masters') points += 10;
-    else if (education === 'bachelors') points += 7;
-    else if (education === 'trades') points += 7;
-    else if (education === 'diploma') points += 4;
+                // Education
+                if (education === 'doctorate') { points += 12; criteria.push('Doctorate Degree: +12 points'); }
+                else if (education === 'masters') { points += 10; criteria.push('Master\'s Degree: +10 points'); }
+                else if (education === 'bachelors') { points += 7; criteria.push('Bachelor\'s Degree: +7 points'); }
+                else if (education === 'trades') { points += 7; criteria.push('Trades Certificate/Diploma: +7 points'); }
+                else if (education === 'diploma') { points += 4; criteria.push('Diploma/Certificate: +4 points'); }
 
-    if (educationLocation === 'alberta') points += 10;
-    else if (educationLocation === 'other') points += 6;
+                if (educationLocation === 'alberta') { points += 10; criteria.push('Completed in Alberta: +10 points'); }
+                else if (educationLocation === 'other') { points += 6; criteria.push('Completed in another province: +6 points'); }
 
-    // Language
-    if (languageScore === '6+') points += 10;
-    else if (languageScore === '5') points += 8;
-    else if (languageScore === '4') points += 5;
+                // Language
+                if (languageScore === '6+') { points += 10; criteria.push('Language Score 6+: +10 points'); }
+                else if (languageScore === '5') { points += 8; criteria.push('Language Score 5: +8 points'); }
+                else if (languageScore === '4') { points += 5; criteria.push('Language Score 4: +5 points'); }
 
-    if (bilingualProficiency === 'yes') points += 3;
+                if (bilingualProficiency === 'yes') { points += 3; criteria.push('Bilingual Proficiency: +3 points'); }
 
-    // Work Experience
-    if (workExperience === '12+') points += 11;
-    else if (workExperience === '6-11') points += 7;
-    else if (workExperience === '<6') points += 3;
+                // Work Experience
+                if (workExperience === '12+') { points += 11; criteria.push('12+ months work experience: +11 points'); }
+                else if (workExperience === '6-11') { points += 7; criteria.push('6-11 months work experience: +7 points'); }
+                else if (workExperience === '<6') { points += 3; criteria.push('Less than 6 months work experience: +3 points'); }
 
-    if (canadianWorkExperience === 'alberta') points += 10;
-    else if (canadianWorkExperience === 'other') points += 6;
+                if (canadianWorkExperience === 'alberta') { points += 10; criteria.push('6+ months in Alberta: +10 points'); }
+                else if (canadianWorkExperience === 'other') { points += 6; criteria.push('6+ months in other provinces: +6 points'); }
 
-    // Age
-    if (age === '21-34') points += 5;
-    else if (age === '35-49') points += 4;
-    else points += 3;
+                // Age
+                if (age === '21-34') { points += 5; criteria.push('Age 21-34: +5 points'); }
+                else if (age === '35-49') { points += 4; criteria.push('Age 35-49: +4 points'); }
+                else if (age === '50+') { points += 3; criteria.push('Age 50+: +3 points'); }
 
-    // Family Connection
-    if (familyConnection === 'yes') points += 8;
+                // Family Connection
+                if (familyConnection === 'yes') { points += 8; criteria.push('Family Connection: +8 points'); }
 
-    // Job Offer
-    if (jobOffer === 'yes') points += 10;
-    if (jobOfferLocation === 'rural' || jobOfferLocation === 'other') points += 5;
-    if (regulatedOccupation === 'yes') points += 10;
+                // Job Offer
+                if (jobOffer === 'yes') { points += 10; criteria.push('Job Offer: +10 points'); }
+                if (jobOfferLocation === 'rural' || jobOfferLocation === 'other') { points += 5; criteria.push('Job Offer in Rural/Other: +5 points'); }
+                if (regulatedOccupation === 'yes') { points += 10; criteria.push('Regulated Occupation: +10 points'); }
 
-    return points;
+                return { points, criteria };
             };
+
+            const { points, criteria } = calculatePoints();
 
             return (
                 <div className="calculator">
                     <h1>Alberta EOI Points Calculator</h1>
+
                     <div>
                         <label htmlFor="education">Highest Level of Education: </label>
                         <select id="education" value={education} onChange={(e) => setEducation(e.target.value)}>
@@ -87,31 +90,125 @@
                             <option value="doctorate">Doctorate Degree</option>
                             <option value="masters">Master's Degree</option>
                             <option value="bachelors">Bachelor's Degree</option>
-                            <option value="other">Other</option>
+                            <option value="trades">Trades Certificate/Diploma</option>
+                            <option value="diploma">Diploma/Certificate</option>
+                            <option value="secondary">Secondary School and lower</option>
                         </select>
                     </div>
+
                     <div>
-                        <label htmlFor="workExperience">Work Experience: </label>
+                        <label htmlFor="educationLocation">Education Location: </label>
+                        <select id="educationLocation" value={educationLocation} onChange={(e) => setEducationLocation(e.target.value)}>
+                            <option value="">Select location</option>
+                            <option value="alberta">Completed in Alberta</option>
+                            <option value="other">Completed in another province</option>
+                            <option value="outside">Completed outside Canada</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label htmlFor="languageScore">Language Proficiency (CLB/NCLC): </label>
+                        <select id="languageScore" value={languageScore} onChange={(e) => setLanguageScore(e.target.value)}>
+                            <option value="">Select score</option>
+                            <option value="6+">6 or higher</option>
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3-">3 or lower</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label htmlFor="bilingualProficiency">Bilingual Proficiency: </label>
+                        <select id="bilingualProficiency" value={bilingualProficiency} onChange={(e) => setBilingualProficiency(e.target.value)}>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label htmlFor="workExperience">Total Work Experience: </label>
                         <select id="workExperience" value={workExperience} onChange={(e) => setWorkExperience(e.target.value)}>
                             <option value="">Select experience</option>
-                            <option value="4+">4+ years</option>
-                            <option value="2-4">2-4 years</option>
-                            <option value="1-2">1-2 years</option>
-                            <option value="<1">Less than 1 year</option>
+                            <option value="12+">12 or more months</option>
+                            <option value="6-11">6-11 months</option>
+                            <option value="<6">Less than 6 months</option>
                         </select>
                     </div>
+
+                    <div>
+                        <label htmlFor="canadianWorkExperience">Canadian Work Experience: </label>
+                        <select id="canadianWorkExperience" value={canadianWorkExperience} onChange={(e) => setCanadianWorkExperience(e.target.value)}>
+                            <option value="">Select experience</option>
+                            <option value="alberta">6+ months in Alberta</option>
+                            <option value="other">6+ months in another province</option>
+                            <option value="none">Less than 6 months in Canada</option>
+                        </select>
+                    </div>
+
                     <div>
                         <label htmlFor="age">Age: </label>
                         <select id="age" value={age} onChange={(e) => setAge(e.target.value)}>
                             <option value="">Select age range</option>
+                            <option value="18-20">18-20 years</option>
                             <option value="21-34">21-34 years</option>
-                            <option value="35-45">35-45 years</option>
-                            <option value="other">Other</option>
+                            <option value="35-49">35-49 years</option>
+                            <option value="50+">50 years and older</option>
                         </select>
                     </div>
-                    <div className="result">
-                        Total Points: {calculatePoints()}
+
+                    <div>
+                        <label htmlFor="familyConnection">Family Connection in Alberta: </label>
+                        <select id="familyConnection" value={familyConnection} onChange={(e) => setFamilyConnection(e.target.value)}>
+                            <option value="no">No eligible family member</option>
+                            <option value="yes">Yes, eligible family member</option>
+                        </select>
                     </div>
+
+                    <div>
+                        <label htmlFor="jobOffer">Job Offer in Alberta: </label>
+                        <select id="jobOffer" value={jobOffer} onChange={(e) => setJobOffer(e.target.value)}>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    {jobOffer === 'yes' && (
+                        <>
+                            <div>
+                                <label htmlFor="jobOfferLocation">Job Offer Location: </label>
+                                <select id="jobOfferLocation" value={jobOfferLocation} onChange={(e) => setJobOfferLocation(e.target.value)}>
+                                    <option value="">Select location</option>
+                                    <option value="calgary">Calgary</option>
+                                    <option value="edmonton">Edmonton</option>
+                                    <option value="rural">Rural Renewal Stream</option>
+                                    <option value="other">Other Alberta community</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label htmlFor="regulatedOccupation">Regulated Occupation: </label>
+                                <select id="regulatedOccupation" value={regulatedOccupation} onChange={(e) => setRegulatedOccupation(e.target.value)}>
+                                    <option value="no">No</option>
+                                    <option value="yes">Yes</option>
+                                </select>
+                            </div>
+                        </>
+                    )}
+
+                    <div className="result">
+                        <strong>Total Points: {points}</strong>
+                        {criteria.length > 0 && (
+                            <div>
+                                <h4>Criteria Breakdown:</h4>
+                                <ul>
+                                    {criteria.map((c, index) => (
+                                        <li key={index}>{c}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+
                     <div className="donation">
                         <h3>Support This Project</h3>
                         <p>If you find this calculator helpful, consider making a donation:</p>
@@ -120,6 +217,7 @@
                             <li>PayPal</li>
                         </ul>
                         <p>Send your donations to: <a href="mailto:imosklv@gmail.com">imosklv@gmail.com</a></p>
+                        <p>Your support helps maintain and improve this tool. Thank you!</p>
                     </div>
                 </div>
             );
