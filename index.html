@@ -19,7 +19,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-  const AlbertaEOICalculator = () => {
+        const AlbertaEOICalculator = () => {
   const [education, setEducation] = useState('');
   const [educationLocation, setEducationLocation] = useState('');
   const [languageScore, setLanguageScore] = useState('');
@@ -74,208 +74,44 @@
     if (regulatedOccupation === 'yes') points += 10;
 
     return points;
-  };
+            };
 
-  return (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>Alberta EOI Points Calculator</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <div>
-            <Label htmlFor="education">Highest Level of Education</Label>
-            <Select onValueChange={setEducation}>
-              <SelectTrigger id="education">
-                <SelectValue placeholder="Select education" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="doctorate">Doctorate Degree</SelectItem>
-                <SelectItem value="masters">Master's Degree</SelectItem>
-                <SelectItem value="bachelors">Bachelor's Degree</SelectItem>
-                <SelectItem value="trades">Trades Certificate/Diploma</SelectItem>
-                <SelectItem value="diploma">Diploma/Certificate</SelectItem>
-                <SelectItem value="secondary">Secondary School and lower</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor="educationLocation">Education Location</Label>
-            <Select onValueChange={setEducationLocation}>
-              <SelectTrigger id="educationLocation">
-                <SelectValue placeholder="Select location" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="alberta">Completed in Alberta</SelectItem>
-                <SelectItem value="other">Completed in another province/territory</SelectItem>
-                <SelectItem value="outside">Completed outside Canada</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor="languageScore">Language Proficiency (CLB/NCLC)</Label>
-            <Select onValueChange={setLanguageScore}>
-              <SelectTrigger id="languageScore">
-                <SelectValue placeholder="Select score" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="6+">6 or higher</SelectItem>
-                <SelectItem value="5">5</SelectItem>
-                <SelectItem value="4">4</SelectItem>
-                <SelectItem value="3-">3 or lower</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor="bilingualProficiency">Bilingual Proficiency</Label>
-            <Select onValueChange={setBilingualProficiency}>
-              <SelectTrigger id="bilingualProficiency">
-                <SelectValue placeholder="Select" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes</SelectItem>
-                <SelectItem value="no">No</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor="workExperience">Total Work Experience</Label>
-            <Select onValueChange={setWorkExperience}>
-              <SelectTrigger id="workExperience">
-                <SelectValue placeholder="Select experience" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="12+">12 or more months</SelectItem>
-                <SelectItem value="6-11">6-11 months</SelectItem>
-                <SelectItem value="<6">Less than 6 months</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor="canadianWorkExperience">Canadian Work Experience</Label>
-            <Select onValueChange={setCanadianWorkExperience}>
-              <SelectTrigger id="canadianWorkExperience">
-                <SelectValue placeholder="Select experience" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="alberta">6+ months in Alberta</SelectItem>
-                <SelectItem value="other">6+ months in another province/territory</SelectItem>
-                <SelectItem value="none">Less than 6 months in Canada</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor="age">Age</Label>
-            <Select onValueChange={setAge}>
-              <SelectTrigger id="age">
-                <SelectValue placeholder="Select age range" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="18-20">18-20 years</SelectItem>
-                <SelectItem value="21-34">21-34 years</SelectItem>
-                <SelectItem value="35-49">35-49 years</SelectItem>
-                <SelectItem value="50+">50 years and older</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <div className="group relative">
-              <Label htmlFor="familyConnection" className="inline-block">Family Connection in Alberta <span className="ml-1 text-sm text-gray-500">(hover for info)</span></Label>
-              <div className="absolute z-10 bg-gray-100 p-2 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-64">
-                Must be a Canadian Citizen or permanent resident over 18 years of age. Eligible family members: parent, grandparent, child, grandchild, sibling, aunt, uncle, niece or nephew. In-laws are not eligible.
-              </div>
-            </div>
-            <Select onValueChange={setFamilyConnection}>
-              <SelectTrigger id="familyConnection">
-                <SelectValue placeholder="Select" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes, eligible family member</SelectItem>
-                <SelectItem value="no">No eligible family member</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div>
-            <Label htmlFor="jobOffer">Job Offer in Alberta</Label>
-            <Select onValueChange={setJobOffer}>
-              <SelectTrigger id="jobOffer">
-                <SelectValue placeholder="Select" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="yes">Yes</SelectItem>
-                <SelectItem value="no">No</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {jobOffer === 'yes' && (
-            <>
-              <div>
-                <Label htmlFor="jobOfferLocation">Job Offer Location</Label>
-                <Select onValueChange={setJobOfferLocation}>
-                  <SelectTrigger id="jobOfferLocation">
-                    <SelectValue placeholder="Select location" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="calgary">Calgary Census Metropolitan area</SelectItem>
-                    <SelectItem value="edmonton">Edmonton Census Metropolitan area</SelectItem>
-                    <SelectItem value="rural">Rural Renewal Stream designated community</SelectItem>
-                    <SelectItem value="other">Other Alberta community</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label htmlFor="regulatedOccupation">Regulated Occupation</Label>
-                <Select onValueChange={setRegulatedOccupation}>
-                  <SelectTrigger id="regulatedOccupation">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </>
-          )}
-
-          <div className="pt-4">
-            <strong>Total Points: {calculatePoints()}</strong>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-};
-
-export default AlbertaEOICalculator;
-                <div>
+            return (
+                <div className="calculator">
                     <h1>Alberta EOI Points Calculator</h1>
-                    {/* Your form elements go here */}
-                    {/* You'll need to replace the UI components with basic HTML elements */}
                     <div>
-                        <label htmlFor="education">Highest Level of Education</label>
-                        <select id="education" onChange={(e) => setEducation(e.target.value)}>
+                        <label htmlFor="education">Highest Level of Education: </label>
+                        <select id="education" value={education} onChange={(e) => setEducation(e.target.value)}>
                             <option value="">Select education</option>
                             <option value="doctorate">Doctorate Degree</option>
-                            {/* ... other options */}
+                            <option value="masters">Master's Degree</option>
+                            <option value="bachelors">Bachelor's Degree</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
-                    {/* ... other form elements */}
                     <div>
-                        <strong>Total Points: {calculatePoints()}</strong>
+                        <label htmlFor="workExperience">Work Experience: </label>
+                        <select id="workExperience" value={workExperience} onChange={(e) => setWorkExperience(e.target.value)}>
+                            <option value="">Select experience</option>
+                            <option value="4+">4+ years</option>
+                            <option value="2-4">2-4 years</option>
+                            <option value="1-2">1-2 years</option>
+                            <option value="<1">Less than 1 year</option>
+                        </select>
                     </div>
-                    {/* Donation information */}
                     <div>
+                        <label htmlFor="age">Age: </label>
+                        <select id="age" value={age} onChange={(e) => setAge(e.target.value)}>
+                            <option value="">Select age range</option>
+                            <option value="21-34">21-34 years</option>
+                            <option value="35-45">35-45 years</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div className="result">
+                        Total Points: {calculatePoints()}
+                    </div>
+                    <div className="donation">
                         <h3>Support This Project</h3>
                         <p>If you find this calculator helpful, consider making a donation:</p>
                         <ul>
